@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+        .main{
+            width: 350px;
+            height: 500px;
+            /* border: 2px solid black; */
+            position: relative;
+            background-color: white;
+            border-radius: 20px;
+            margin: auto;
+            padding: 10px;
+
+        }
+        .main #m1{
+            width: 80%;
+            height: 10%;
+            border: 1px solid black;
+            margin-top: 5%;
+            border-radius: 3px;
+            box-shadow: 0px 0px 4px 0.4px gray;
+            
+            margin-left: 10%;
+
+        }
+        .main .m2{
+            width: 85%;
+            height: 65%;
+            /* border: 1px solid black; */
+            margin-bottom: 20%;
+            border-radius: 3px;
+            margin-left: 7.5%;
+            margin-top: 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+        }
+        .main .m2 #s{
+            width: 20%;
+            border-radius: 14px;
+            height: 20%;
+            cursor: pointer;
+            /* box-shadow: 0px 0px 4px 0.4px gray; */
+            border: 1px solid black;
+        }
+        .main .m2 #s h1{
+            /* text-align: center; */
+            /* margin: auto; */
+            /* padding: auto; */
+            display: flex;
+            /* align-items: center; */
+            margin-top: 24%;
+            justify-content: center;
+        }
+        input{
+            font-size: 24px;
+            background-color: gainsboro;
+        }
+        #s:hover{
+            /* box-shadow: 0px 0px 10px 10px gray; */
+            /* background-color: gainsboro; */
+             box-shadow: 0px 0px 4px 4px gray;
+        }
+        img{
+            position: absolute;
+            top:-40%;
+            left: -16%;
+            /* height: 100px; */
+        }
+    
+      
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!-- <img src="/23_08_2024/img/cal1-removebg-preview.png" alt=""> -->
+        <div id="m1">
+            <!-- <h1 id="ans" style="text-align: center; margin: auto; margin-top: 2%;"></h1> -->
+            <input type="text" name="" id="textt" placeholder="" style="width: 100%; height: 100%;    box-shadow: 0px 0px 4px 0.4px gray;">
+        </div>
+        <div class="m2">
+            <div id="s" onclick="cal('7')">
+                <h1>7</h1>
+            </div>
+            <div id="s" onclick="cal('8')">
+                <h1>8</h1>
+            </div>
+            <div id="s" onclick="cal('9')">
+                <h1>9</h1>
+            </div>
+            <div id="s"   onclick="cal('+')"   style="background-color: black; color: white;">
+                <h1 >+</h1>
+            </div>
+            <div id="s" onclick="cal('4')">
+                <h1>4</h1>
+            </div>
+            <div id="s" onclick="cal('5')">
+                <h1>5</h1>
+            </div>
+            <div id="s" onclick="cal('6')">
+                <h1>6</h1>
+            </div>
+            <div id="s"   onclick="cal('-')"     style="background-color: black; color: white;">
+                <h1 >-</h1>
+            </div>
+            <div id="s" onclick="cal('1')">
+                <h1>1</h1>
+            </div>
+            <div id="s" onclick="cal('2')">
+                <h1>2</h1>
+            </div>
+            <div id="s" onclick="cal('3')">
+                <h1>3</h1>
+            </div>
+            <div id="s"  onclick="cal('*')"      style="background-color: black; color: white;">
+                <h1 >*</h1>
+            </div>
+            <div id="s" style="background-color: red;" onclick="can()">
+                <h1 style="color:white;">C</h1>
+
+            </div>
+            <div id="s" onclick="cal('0')">
+                <h1>0</h1>
+            </div>
+            <div id="s"  onclick="calc('=')"      style="background-color: black; color: white;">
+                <h1>=</h1>
+            </div>
+            <div id="s" onclick="cal('/')"       style="background-color: black; color: white;">
+                <h1 >/</h1>
+            </div>
+        </div>
+    </div>
+    <script src="cal.js"></script>
+</body>
+<script>
+    function cal(a){
+        document.getElementById("textt").value += a;
+    }
+    function can(){
+        document.getElementById("textt").value=""
+    }
+    function calc(){
+        let t = document.getElementById("textt").value;
+        document.getElementById("textt").value=eval(t)
+    }
+
+    
+</script>
+</html>
+
+
