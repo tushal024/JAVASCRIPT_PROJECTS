@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkSheet</title>
+    <style>
+        body{
+            background-image: url(https://wallpapers.com/images/hd/plain-white-background-3qzwpiavktxg11pr.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+        .m_h {
+            text-shadow: 4px 2px 2px gray;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .st {
+            margin: auto;
+            height: auto;
+        }
+
+        .sheet {
+            margin: auto;
+            margin-top: 2%;
+            th {
+                width: 150px;
+            }
+        }
+        .main_side{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 95%;
+            height: 85vh;
+            margin-left: 2.5%;
+            border-radius: 5px;
+            box-shadow: 0 0 10px 0 rgb(182, 216, 230);
+            background: linear-gradient(white,white,rgb(163, 212, 231));
+
+            .side1,.side2{
+                width: 45%;
+                height: 500px;
+            }
+        }
+        label{
+            font-size: 20px;
+        }
+        input{
+            width: 200px;
+            height: 16px;
+            border-radius: 4px;
+            padding-left: 5px;
+        }
+        .side1 > .st> fieldset> input{
+            margin-left: 60px;
+        }
+        .side1 .st,.side2 .sheet{
+           background: linear-gradient(white,skyblue);
+        }
+
+        button{
+            width: 100px;
+            height: 35px;
+            font-size: 16px;
+            text-align: center;
+        
+            margin-top: 2%;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px 0 rgb(171, 171, 171);
+
+        }
+        fieldset{
+            padding: 15px;
+        }
+        table tr td,th{
+            text-align: center;
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="m_h">STUDENT MARKSHEET</h1>
+
+    <!-- <form action=""> -->
+
+    <div class="main_side">
+        <div class="side1" >
+            <div class="st" style="margin-top: 3%;">
+                <fieldset contextmenu="hell">
+                    <legend class="border" style="font-size: 20px; font-weight: bold; text-decoration: underline; text-transform: uppercase;">Student Information</legend>
+                    <label for="">First Name:</label>
+                    <input type="text" name="" id="name1" placeholder="  First Name..." class="border">
+                    <br><br>
+                    <label for="" >Last Name:</label>
+                    <input type="text" name="" id="name2" placeholder="  Last Name..." class="border">
+                    <br>
+                    <br>
+                    <label for="">Seat No.:</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" id="roll" placeholder="  Roll No..."
+                        class="border">
+                </fieldset>
+            </div>
+
+            <div class="st" style="margin-top: 3%;">
+                <fieldset contextmenu="hell" id="oo">
+                    <legend class="border" style="font-size: 20px; font-weight: bold; text-decoration: underline; text-transform: uppercase;">Subject Marks</legend>
+                    <label for="">Networking:</label>
+                    <input type="text" name="" style="margin-left:48px;" id="s1" placeholder="  Networking..."
+                        class="border"><br><br>
+
+                    <label for="">DSA:</label>
+                    <input type="text" name="" style="margin-left: 107px;"  id="s2" placeholder="  DSA..." class="border">
+                    <br>
+                    <br>
+                    <label for="" >JAVA:</label>
+                    <input type="text " style="margin-left: 101px;"  name="" id="s3" placeholder="  JAVA..."
+                        class="border">
+                    <br>
+                    <br>
+                    <label for="">Cyber Security:</label>
+                    <input type="text" name="" style="margin-left: 25px;"  id="s4" placeholder="  Cyber Security..."
+                        class="border">
+                    <br><br>
+
+                    <button onclick="st()">SUBMIT</button>
+                    <button style="margin-left: 2%;">RESET</button>
+               
+            </div>
+
+        </div>
+
+        <div class="side2">
+            <div class="sheet">
+                <h1 style="font-size: 26px; text-align: center; text-decoration: underline;">Fainal Result</h1><br>
+              
+                <table border="1px" style="width: 100%; margin-top: -20px;">
+                    <tr>
+                        <th colspan="5" style=" font-size: 20px; text-align: start; padding: 10px;">Name: <span style="font-weight: 500;" id="f_name">  </span> <span style="font-weight: 500;" id="f_name" ></span><br>
+                            <span>Enrollment No.: <span style="font-weight: 500;"> 003324254147</span></span><br>
+                             <span>Seat No.: <span style="font-weight: 500;" id="r_name"> </span></span></th>
+                        <!-- <th colspan="2">Roll No.: 24</th> -->
+                    </tr>
+                    <tr >
+                        <th colspan="5" style="font-size: 20px;padding: 10px;">Subject Name & Marks</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 50px; font-size: 18px;">Index</th>
+                        <th style="font-size: 18px;">Subject</th>
+                        <th style="font-size: 18px;">Total Marks</th>
+                        <th style="font-size: 18px;">Marks</th>
+                        <th style="width: 80px; font-size: 18px;">Grade</th>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px;">1</td>
+                        <td>Networking</td>
+                        <td>100</td>
+                        <td id="ss1"></td>
+                        <td style="width: 80px;" id="grr"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px;">2</td>
+                        <td>DSA</td>
+                        <td>100</td>
+                        <td id="ss2"></td>
+                        <td style="width: 80px;" id="grr1"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px;">3</td>
+                        <td>JAVA</td>
+                        <td>100</td>
+                        <td id="ss3"></td>
+                        <td style="width: 80px;" id="grr2"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px;">4</td>
+                        <td>Cyber Security</td>
+                        <td>100</td>
+                        <td id="ss4"></td>
+                        <td style="width: 80px;" id="grr3"></td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>-</th>
+                        <th>400</th>
+                        <th id="ss"></th>
+                        <th >-</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5" style="text-align: start; padding: 10px; font-size: 20px;"> Result:  <span style="font-weight: 400; text-decoration: underline; text-transform: uppercase;" id="pf"></span> 
+                              <span style="margin-left: 100px; ">Percentage: <span style="font-weight: 400; text-decoration: underline;" id="parr"> </span></span> 
+                               <span style="margin-left: 100px;" > Grade: <span id="uu"></span></span>  </th>
+                      
+                    </tr>
+            
+                </table>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="mar_js.js"></script>
+</body>
+
+</html>
