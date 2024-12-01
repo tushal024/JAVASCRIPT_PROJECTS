@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" id="ff" style="margin: auto;">
+
+        <input type="text" placeholder="   Username..." name="" id="inp"> <br><br>
+        <input type="text" name="" placeholder="    Age..." id="ag"><br><br>
+        <input type="submit" name="" id="">
+    </form>
+    <!-- <div id="st"> -->
+    <br><br><br>
+    <table border="1px" style="width: 60%; margin: auto;">
+        <tr>
+            <td>No.</td>
+            <td>Name</td>
+            <td>age</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        <tbody id="st">
+
+        </tbody>
+        <tfoot>
+
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><button onclick="ss()">EDIT</button></td>
+            <td><button>DELETE</button></td>
+        </tfoot>
+
+
+    </table>
+    </div>
+    <div id="sss">
+
+    </div>
+</body>
+
+
+
+<script>
+
+
+
+    let tt = ""
+    let age = ""
+    let obj = {}
+    let arr = []
+
+    document.getElementById("ff").addEventListener("submit", (e) => {
+        e.preventDefault();
+        tt = document.getElementById("inp").value
+        age = document.getElementById("ag").value
+
+        obj = {
+
+            user: tt,
+            age
+        }
+
+
+
+
+
+
+        document.getElementById("st").innerHTML = `       <tr>
+                <td>1</td>
+                <td>   ${tt}  </td>
+                <td>   ${age} </td>
+            </tr> `
+
+
+        console.log(obj);
+
+        arr.push(obj)
+        console.log(arr);
+    })
+
+
+    function ss() {
+        document.getElementById("ff").reset();
+    }
+
+
+
+
+
+    let ans = arr.filter((e) => {
+        return "hello"
+    })
+
+document.getElementById("sss").innerHTML = ans
+
+    // op()
+
+ 
+
+    // console.log(ans);
+
+
+
+
+
+
+</script>
+
+</html>

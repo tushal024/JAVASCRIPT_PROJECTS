@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CRUD</title>
+</head>
+<body>
+
+<h1>Simple CRUD Operations</h1>
+
+<!-- Input Form -->
+<h3>Add User</h3>
+Name: <input type="text" id="name" required>
+Age: <input type="number" id="age" required>
+<button onclick="addUser()">Add User</button>
+
+<h3>Users List</h3>
+<ul id="userList">
+    <!-- Users will appear here -->
+</ul>
+
+<script>
+    let users = [];
+
+    // Function to render the users list
+    function renderUsers() {
+        const userList = document.getElementById("userList");
+        userList.innerHTML = ""; // Clear the list before re-rendering
+        users.forEach((user, index) => {
+            const li = document.createElement("li");
+            li.textContent = `Name: ${user.name}, Age: ${user.age}`;
+            
+            // Add Edit and Delete buttons for each user
+            li.innerHTML += ` <button onclick="editUser(${index})">Edit</button>`;
+            li.innerHTML += ` <button onclick="deleteUser(${index})">Delete</button>`;
+            
+            userList.appendChild(li);
+        });
+    }
+
+    // Add a new user
+    function addUser() {
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+
+        if (name && age) {
+            users.push({ name, age });
+            renderUsers();  // Re-render the list
+            document.getElementById("name").value = ""; // Clear input
+            document.getElementById("age").value = ""; // Clear input
+        } else {
+            alert("Please enter both name and age.");
+        }
+    }
+
+    // Edit an existing user
+    function editUser(index) {
+        const newName = prompt("Enter new name:", users[index].name);
+        const newAge = prompt("Enter new age:", users[index].age);
+
+        if (newName && newAge) {
+            users[index] = { name: newName, age: newAge };
+            renderUsers();  // Re-render the list
+        }
+    }
+
+    // Delete a user
+    function deleteUser(index) {
+        users.splice(index, 1);
+        renderUsers();  // Re-render the list
+    }
+</script>
+
+</body>
+</html>
