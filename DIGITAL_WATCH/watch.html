@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    
+    <form action="" id="for">
+        <input type="number" value="" placeholder="Enter Minits... " name="" id="inp">
+        <!-- <input type="" name="" id=""> -->
+        <input type="submit" name="" id="">
+        
+    </form>
+    <h1 id="show"></h1>
+    <div id="ss">
+
+    </div>
+</body>
+
+<script>
+let min =0
+let tt=0
+
+    document.getElementById("for").addEventListener("submit",(e)=>{
+        e.preventDefault();
+         min = document.getElementById("inp").value
+     
+        // document.getElementById("show").innerHTML= min
+        document.getElementById("show").innerHTML= min 
+    })
+    document.getElementById("ss").innerHTML= tt 
+    let mm = Number(min)
+    
+    // setInterval(() => {
+    //     mm = mm+1
+    //     console.log(mm);
+    // }, 1000);
+    
+</script>
+</html>

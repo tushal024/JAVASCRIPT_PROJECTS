@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Up and Speed Down Counter</title>
+</head>
+<body>
+    <div>
+        <p id="counter">0</p>
+        <button onclick="startCounter()">Start</button>
+        <button onclick="speedUp()">Speed Up</button>
+        <button onclick="speedDown()">Speed Down</button>
+    </div>
+
+    <script>
+        let counter = 0;
+        let interval;
+        let intervalTime = 1000; // initial interval time in ms
+
+        // Start the counter
+        function startCounter() {
+            if (interval) clearInterval(interval); // Clear previous interval
+            interval = setInterval(function() {
+                counter++;
+                document.getElementById('counter').innerText = counter;
+            }, intervalTime);
+        }
+
+        // Speed up the counter
+        function speedUp() {
+            if (intervalTime > 100) { // Prevent interval from becoming too fast
+                intervalTime -= 200; // Decrease interval time to speed up
+                restartCounter();
+            }
+        }
+
+        // Speed down the counter
+        function speedDown() {
+            intervalTime += 200; // Increase interval time to slow down
+            restartCounter();
+        }
+
+        // Restart the counter with the new interval time
+        function restartCounter() {
+            clearInterval(interval); // Clear previous interval
+            interval = setInterval(function() {
+                counter++;
+                document.getElementById('counter').innerText = counter;
+            }, intervalTime);
+        }
+    </script>
+</body>
+</html>

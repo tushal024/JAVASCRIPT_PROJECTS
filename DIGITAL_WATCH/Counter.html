@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button   onclick="up()">+</button>
+    <h1 id="num">0   </h1>
+    <button   onclick="dow()">-</button>
+
+    <button onclick="s_dow()"> Speed_Down </button>
+    <button onclick=" auto()">Auto Count</button>
+    <button  onclick="s_up()"> Speed_UP</button>
+
+    <button onclick="stop()">Stop</button>
+    <button onclick="restart()">Reset</button>
+</body>
+
+<script>
+
+let inc=0
+let count=1000
+let st=""
+
+
+
+function up(){
+
+    inc +=1
+
+    document.getElementById("num").innerHTML= inc
+    if(inc>500){
+        inc= 500
+    }
+    
+}
+
+function dow(){
+
+    inc -=1
+
+    if(inc <=0){
+        inc=0
+    }
+    document.getElementById("num").innerHTML= inc
+
+    if(inc>500){
+        inc= 500
+    }
+
+
+}
+
+function auto(){
+
+let st= setInterval(() => {
+        inc +=1
+        document.getElementById("num").innerHTML= inc
+    }, count);
+
+    if(inc>500){
+        inc= 500
+    }
+}
+
+
+function s_up(){
+    count -= 500
+  let  st1= setInterval(() => {
+        inc +=1
+        if(inc>500){
+        inc = 500
+
+        setTimeout(() => {
+        clearInterval(st);
+        clearInterval(st1);
+        clearInterval(st3);
+        
+    }, 5);
+                 }
+
+        document.getElementById("num").innerHTML= inc
+    }, count);
+
+  
+}
+
+function s_dow(){
+    count += 2000
+    console.log(count);
+    
+    st3= setInterval(() => {
+        inc +=1
+
+        document.getElementById("num").innerHTML= inc
+
+        
+    }, count);
+
+   
+}
+
+
+function stop(){
+
+  setTimeout(() => {
+        clearInterval(st);
+        clearInterval(st1);
+        clearInterval(st3);
+        
+    }, 1);
+}
+
+
+function restart(){
+
+    inc=0
+    document.getElementById("num").innerHTML= inc
+}
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #2e2e2e;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .stopwatch-container {
+            text-align: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #time-display {
+            font-size: 60px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ddd;
+        }
+        button:hover {
+            background-color: #45a049;
+        }   
+    </style>
+</head>
+<body>
+    <div class="stopwatch-container">
+        <div id="time-display">00:00:00</div>
+        <div class="controls">
+            <button id="startStopBtn">Start</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        
+        let startStopBtn = document.getElementById('startStopBtn');
+        let resetBtn = document.getElementById('resetBtn');
+        let timeDisplay = document.getElementById('time-display');
+
+        let timer; // Stores the setInterval reference
+        let isRunning = false; // Tracks if the stopwatch is running
+        let elapsedTime = 0; // Time in seconds
+
+        function formatTime(seconds) {
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let secs = seconds % 60;
+
+            // Format to always show two digits
+            return `${padZero(hours)}:${padZero(minutes)}:${padZero(secs)}`;
+        }
+
+        function padZero(num) {
+            return num < 10 ? `0${num}` : num;
+        }
+
+        function startStopwatch() {
+            if (!isRunning) {
+                timer = setInterval(() => {
+                    elapsedTime++;
+                    timeDisplay.textContent = formatTime(elapsedTime);
+                }, 1000);
+                startStopBtn.textContent = 'Stop';
+                isRunning = true;
+            } else {
+                clearInterval(timer);
+                startStopBtn.textContent = 'Start';
+                isRunning = false;
+            }
+        }
+
+        function resetStopwatch() {
+            clearInterval(timer);
+            elapsedTime = 0;
+            timeDisplay.textContent = formatTime(elapsedTime);
+            startStopBtn.textContent = 'Start';
+            isRunning = false;
+        }
+
+        startStopBtn.addEventListener('click', startStopwatch);
+        resetBtn.addEventListener('click', resetStopwatch);
+
+    </script>
+
+
+
+</body>
+</html>
+
+
+

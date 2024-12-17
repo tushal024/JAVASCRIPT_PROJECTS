@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CRUD Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Simple CRUD App</h1>
+
+<!-- Form to create a user -->
+Name: <input type="text" id="name" placeholder="Enter name">
+Age: <input type="text" id="age" placeholder="Enter age">
+<button onclick="addUser()">Add User</button>
+
+<!-- User List Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="userList">
+        <!-- List of users will appear here -->
+    </tbody>
+</table>
+
+<script>
+    let users = []; // Array to hold the users
+
+    // Function to add a user
+    function addUser() {
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+
+        // Validate input
+        if (name === '' || age === '') {
+            alert('Please fill in both fields!');
+            return;
+        }
+
+        // Add user to array
+        users.push({ name, age });
+
+        // Clear input fields
+        document.getElementById('name').value = '';
+        document.getElementById('age').value = '';
+
+        // Display updated user list
+        displayUsers();
+    }
+
+    // Function to display users in the table
+    function displayUsers() {
+        const userList = document.getElementById('userList');
+        userList.innerHTML = ''; // Clear existing list
+
+        // Loop through users and create table rows
+        users.forEach((user, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.name}</td>
+                <td>${user.age}</td>
+                <td>
+                    <button onclick="deleteUser(${index})">Delete</button>
+                    <button onclick="editUser(${index})">Edit</button>
+                </td>
+            `;
+            userList.appendChild(row);
+        });
+    }
+
+    // Function to delete a user
+    function deleteUser(index) {
+        users.splice(index, 1); // Remove user from array
+        displayUsers(); // Refresh the user list
+    }
+
+    // Function to edit a user
+    function editUser(index) {
+        const user = users[index];
+        document.getElementById('name').value = user.name;
+        document.getElementById('age').value = user.age;
+
+        // Remove the user from the array and refresh the list
+        users.splice(index, 1);
+        displayUsers();
+    }
+</script>
+
+</body>
+</html>

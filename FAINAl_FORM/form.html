@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9xH5da2QfNVGhbxDVhcgBkO0k8p3jjW8xGsziImT4WHLHq1wjTU-OLKOrKmuT8NClYmI&usqp=CAU" type="image/x-icon">
+    <title>Form</title>
+    <style>
+        /* Dark theme background and color for body */
+        body {
+            width: 98%;
+            height: 90vh;
+            background-image: url(https://i.pinimg.com/originals/13/5d/cf/135dcf0764e454da522b8880ad158f05.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-blend-mode: overlay;
+            background-color: rgba(10, 10, 10, 0.681);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Styling for forms */
+        #login, #signup {
+            width: 500px;
+            height: 600px;
+            box-shadow: 0px 0px 5px 2px #A34546;
+            border: 2px solid #B7081E;
+            border-radius: 20px;
+            margin-top: 5%;
+            background-color: rgba(30, 30, 30, 0.8);
+            color: white;
+            padding: 20px;
+        }
+
+        /* Input styling */
+        input {
+            width: 80%;
+            border-radius: 20px;
+            color: white;
+            background-color: transparent;
+            border: 2px solid #444;
+            height: 40px;
+            padding-left: 10px;
+        }
+
+        input::placeholder {
+            color: white;
+        }
+
+        select {
+            width: 84%;
+            border-radius: 20px;
+            height: 45px;
+
+            background-color: #1B1B1A;
+            color: white;
+            border: 2px solid #444;
+            padding-left: 10px;
+        }
+
+        /* Show password icon */
+        #show, #showw {
+            width: 16px;
+            height: 14px;
+            margin-top: 10px;
+            color: white;
+        }
+
+        /* Error message styling */
+        span {
+            font-size: 17px;
+            color: #d0373a;
+            /* font-weight: bold; */
+        }
+
+        /* Button styling */
+        input[type="submit"] {
+            color: #B7081E;
+            font-size: 20px;
+            background-color: rgb(250, 248, 248);
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #B7081E;
+            transform: scale(0.91);
+            transition: 1s;
+            color: white;
+        }
+
+        /* Footer text */
+        p {
+            font-size: 18px;
+            margin-top: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Style for switching between forms */
+        #sb, #lb {
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Form title color */
+        h1 {
+            color: white;
+        }
+        #lb:hover{
+            text-decoration: underline;
+            color: gray;
+        }
+        #sb:hover{
+            text-decoration: underline;
+            color: gray;
+        }
+        #s_p{
+            margin-top: 10px !important;
+            padding-top: 10px;
+            /* color:; */
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <!-- Signup Form -->
+        <form action="" id="signup">
+            <h1>.....Signup......</h1>
+            <input type="text" id="user" placeholder="Username">
+            <br><br>
+            <input type="email" id="name_1" placeholder="Email">
+            <br><span id="s_n"></span><br>
+            <input type="password" id="pass_1" placeholder="Password">
+            <br><span id="s_p"></span><br>
+            <input type="checkbox" onclick="myFunction()" id="show"> <span>Show Password</span>
+            <br><br>
+            <input type="text" placeholder="Hobby">
+            <br><br>
+            <select id="gender">
+                <option value="">Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <br><span id="genderText"></span><br><br>
+            <input type="submit" value="Sign Up">
+            <p id="lb">Existing User? Log in</p>
+        </form>
+
+        <!-- Login Form -->
+        <form action="" id="login" style="display: none;">
+            <h1>.....Login......</h1>
+            <input type="email"  value="" id="name_2" placeholder="Email">
+            <br><span id="l_n"></span><br>
+            <input type="password"  value="" id="pass_2" placeholder="Password">
+            <br><span id="l_p"></span><br>
+            <input type="checkbox" onclick="myFunction1()" id="showw"> <span>Show Password</span>
+            <br><br>
+            <input type="submit" value="Login">
+            <p id="sb">Go To Signup</p>
+        </form>
+    </center>
+
+    <script src="script_1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

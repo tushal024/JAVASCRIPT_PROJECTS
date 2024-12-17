@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Animated Counter</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.3s ease;
+    }
+
+    .counter-container {
+      text-align: center;
+      padding: 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      transition: all 0.5s ease;
+    }
+
+    .counter {
+      font-size: 80px;
+      font-weight: bold;
+      color: #4CAF50;
+      padding: 10px;
+      transition: all 0.4s ease;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .counter.increment {
+      color: #FF9800;
+      transform: scale(1.1);
+    }
+
+    .counter.decrement {
+      color: #F44336;
+      transform: scale(0.9);
+    }
+
+    .button-container button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-container button:hover {
+      background-color: #0056b3;
+    }
+
+    .button-container button:active {
+      transform: scale(0.98);
+    }
+
+    .reset-btn {
+      background-color: #FFC107;
+    }
+
+    .toggle-theme {
+      background-color: #8e44ad;
+    }
+
+    .progress-bar-container {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background-color: #4CAF50;
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+
+    .countdown-timer {
+      font-size: 30px;
+      margin-top: 20px;
+      color: #FF5722;
+    }
+
+    .input-group {
+      margin-top: 20px;
+    }
+
+    .input-group input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 12px;
+      width: 50%;
+      margin-right: 10px;
+    }
+
+    .theme-select {
+      margin-top: 10px;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="counter-container">
+    <div class="counter" id="number">0</div>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="emoji" id="emoji"></div>
+    <div class="countdown-timer" id="countdown-timer"></div>
+    
+    <!-- Multiple counters -->
+    <div id="multiple-counters"></div>
+
+    <!-- Customizable themes -->
+    <div class="theme-select">
+      <label for="theme-select">Select Theme: </label>
+      <select id="theme-select">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+
+    <!-- Input for custom increment/decrement -->
+    <div class="input-group">
+      <input type="number" id="customValue" placeholder="Custom Increment/Decrement" />
+      <button onclick="handleCustomIncrement()">Set Increment</button>
+    </div>
+
+    <!-- Fast Action Buttons -->
+    <div class="button-container">
+      <button onclick="incrementCounter()">Increase</button>
+      <button onclick="decrementCounter()">Decrease</button>
+      <button class="reset-btn" onclick="resetCounter()">Reset</button>
+      <button onclick="saveCurrentValue()">Save Current Value</button>
+      <button onclick="loadSavedValue()">Load Saved Value</button>
+      <button onclick="addMultipleCounter()">Add New Counter</button>
+    </div>
+
+    <!-- Export/Import Data -->
+    <div class="input-group">
+      <button onclick="exportCounterData()">Export Data</button>
+      <button onclick="importCounterData()">Import Data</button>
+    </div>
+  </div>
+
+  <script>
+    let counterValue = 0;
+    const counterElement = document.getElementById('number');
+    const progressBar = document.getElementById('progress-bar');
+    const emojiElement = document.getElementById('emoji');
+    const countdownTimerElement = document.getElementById('countdown-timer');
+    const customValueInput = document.getElementById('customValue');
+    const themeSelect = document.getElementById('theme-select');
+    let customIncrement = 1;  // Default increment/decrement value
+    const maxCount = 100;
+    const minCount = 0;
+    let countdownValue = 60;  // Countdown starts from 60 seconds
+    let countdownInterval;
+
+    // Function to handle custom increment
+    function handleCustomIncrement() {
+      customIncrement = parseInt(customValueInput.value) || 1;
+    }
+
+    // Functions for Multiple Counters
+    function addMultipleCounter() {
+      const counterDiv = document.createElement('div');
+      counterDiv.innerHTML = `
+        <div class="counter">0</div>
+        <div class="button-container">
+          <button onclick="incrementCounter()">Increase</button>
+          <button onclick="decrementCounter()">Decrease</button>
+          <button onclick="resetCounter()">Reset</button>
+        </div>
+      `;
+      document.getElementById('multiple-counters').appendChild(counterDiv);
+    }
+
+    // Increment Function
+    function incrementCounter() {
+      counterValue += customIncrement;
+      if (counterValue <= maxCount) {
+        animateCounter('increment');
+        updateProgressBar();
+        checkEmoji();
+      }
+    }
+
+    // Decrement Function
+    function decrementCounter() {
+      counterValue -= customIncrement;
+      if (counterValue >= minCount) {
+        animateCounter('decrement');
+        updateProgressBar();
+        checkEmoji();
+      }
+    }
+
+    // Reset Function
+    function resetCounter() {
+      counterValue = 0;
+      animateCounter('reset');
+      updateProgressBar();
+      checkEmoji();
+    }
+
+    // Update Progress Bar
+    function updateProgressBar() {
+      const percentage = (counterValue / maxCount) * 100;
+      progressBar.style.width = percentage + '%';
+    }
+
+    // Animate Counter
+    function animateCounter(type) {
+      counterElement.textContent = counterValue;
+      counterElement.classList.remove('increment', 'decrement');
+      void counterElement.offsetWidth;
+      counterElement.classList.add(type);
+    }
+
+    // Emoji Reactions
+    function checkEmoji() {
+      if (counterValue === 10) {
+        emojiElement.textContent = "🎉";
+      } else if (counterValue === 50) {
+        emojiElement.textContent = "🏅";
+      } else if (counterValue === 100) {
+        emojiElement.textContent = "🏆";
+      } else {
+        emojiElement.textContent = "";
+      }
+    }
+
+    // Save and Load Counter
+    function saveCurrentValue() {
+      localStorage.setItem('counterValue', counterValue);
+      alert('Current value saved!');
+    }
+
+    function loadSavedValue() {
+      counterValue = parseInt(localStorage.getItem('counterValue')) || 0;
+      counterElement.textContent = counterValue;
+      updateProgressBar();
+    }
+
+    // Theme Selector
+    themeSelect.addEventListener('change', function () {
+      if (themeSelect.value === 'dark') {
+        document.body.style.backgroundColor = '#2c3e50';
+        counterElement.style.color = '#ECF0F1';
+        progressBar.style.backgroundColor = '#2980b9';
+      } else {
+        document.body.style.backgroundColor = '#f0f4f8';
+        counterElement.style.color = '#4CAF50';
+        progressBar.style.backgroundColor = '#4CAF50';
+      }
+    });
+
+    // Export/Import Counter Data
+    function exportCounterData() {
+      const data = {
+        counterValue: counterValue,
+      };
+      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'counterData.json';
+      link.click();
+    }
+
+    function importCounterData() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = function (event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function () {
+          const data = JSON.parse(reader.result);
+          counterValue = data.counterValue || 0;
+          counterElement.textContent = counterValue;
+          updateProgressBar();
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    // Start Countdown Timer
+    function startCountdown() {
+      countdownInterval = setInterval(() => {
+        if (countdownValue > 0) {
+          countdownTimerElement.textContent = countdownValue + "s remaining";
+          countdownValue--;
+        } else {
+          clearInterval(countdownInterval);
+          countdownTimerElement.textContent = "Time's up!";
+        }
+      }, 1000);
+    }
+
+    // Start Countdown Timer when the page loads
+    startCountdown();
+  </script>
+</body>
+</html>
